@@ -1,3 +1,4 @@
+############### Подгрузка библиотек. Закомменчены библиотеки с гитхаба ###############
 
 library(shiny)
 
@@ -27,7 +28,7 @@ library(shinydashboard)
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
   
-  # Применение фильтра
+  # Применение фильтра - Server-часть
   
   theme_few(base_size = 12, base_family = "")
   res_mod <- callModule(
@@ -38,8 +39,8 @@ server <- function(input, output, session) {
   )
   
 
-#  output$table <- renderDataTable(res_mod())
-  # Замер текущего размера выборки
+
+  ############### Замер текущего размера выборки ###############
   output$chosen2 <- renderInfoBox({
     a = "Текущая выборка"
     b = nrow(res_mod())
@@ -58,7 +59,7 @@ server <- function(input, output, session) {
   
  
   
-  # Построение графиков
+  ############### Построение графиков ###############
   
   output$Sex2 = renderPlot({
     
@@ -276,7 +277,7 @@ server <- function(input, output, session) {
       )+
       geom_text(aes(x=pplaces()$df4, y = pplaces()$per+0.02, label=pplaces()$label),size = 5)+ coord_flip()+scale_fill_manual(values = my.cols)},bg = "#ffffff")
   
-  # Реактивные функции для сохранения выборки для вывода графиков и выгрузки
+  ############### Реактивные функции для сохранения выборки для вывода графиков и выгрузки ###############
   
   psx <- reactive({
     sx = as.data.frame(table(res_mod()$Sex)/nrow(res_mod()))
@@ -440,7 +441,7 @@ server <- function(input, output, session) {
     hp = subset(hp, label != "0%")
   })
   
-  # Чистим файлы для вставки в выгрузку
+  ############### Чистим файлы для вставки в выгрузку ###############
   
   esx <- reactive ({
     esx = psx()
@@ -527,7 +528,7 @@ server <- function(input, output, session) {
     names(ehp)=c("Значение здоровья", "Доля, %")
     ehp = as.data.frame(ehp)
   })
-  # Выгрузка в Эксель
+  ############### Выгрузка в Эксель ###############
   
   output$DD1 <- downloadHandler(
     filename = function() { "SMData.xlsx" },
