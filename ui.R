@@ -1,3 +1,5 @@
+# Подгрузка библиотек. Закомменчены библиотеки с гитхаба
+
 library(shiny)
 library(shinyWidgets)
 library(plyr)
@@ -6,20 +8,13 @@ library(shinydashboard)
 library(extrafont)
  #install.packages("devtools")
 #devtools::install_github("dreamRs/shinyWidgets",force = TRUE)
-
-shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishere.com',
-                                                    # tags$img(src='logo.png')))
-  
+####################### Начало UI-файла #######################
+shinyUI(dashboardPage(dashboardHeader(
   
   
   title = "Social Media Dashboard",
                                       titleWidth = 250
-  #,
- # tags$li(a(href = 'http://omirussia.ru', target="_blank",
-   #         img(src = 'om.JPG',
-    #            title = "Company Home", height = "40px")),
-    #      class = "dropdown")
-  
+
    
   
   
@@ -29,7 +24,7 @@ shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishe
                               
                       
                        tags$br(),
-                       
+ ####################### UI-часть группового фильтра базы + оформление через CSS #######################                      
                        selectizeGroupUI(
                          id = "my-filters",
                          btn_label = tags$b(tags$span(style="color:#f2f5f5", "Сбросить фильтры")),
@@ -52,6 +47,7 @@ shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishe
                      )),
                      dashboardBody(
                        tags$head(
+                        ####################### Элемент CSS-таблицы для настройки цветовой гаммы #######################
                          tags$style(HTML(".main-header .logo{background-color: #C23C33 !important;}
                                           .main-header .navbar{background-color: #51778F !important;}
                                           .main-sidebar {background-color: grey !important;}
@@ -66,7 +62,7 @@ shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishe
                          ),
                          
                        splitLayout(
-                         
+                         ####################### Отображение текущей выборки и кнопка выгрузки в Excel #######################
                            infoBoxOutput("chosen2", width = 8),
                            div(downloadButton('DD1', 'Download to Excel'), style = "float:right")
                            
@@ -74,7 +70,7 @@ shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishe
                        ),
                        
                        tabsetPanel(type = "pills",
-                       
+                       ####################### Вкладки с графиками #######################
                        tabPanel("Общая информация",
                                 wellPanel(style = "border: 1px solid silver;font-family: 'Calibri'; background-color: #ffffff",
                                                                 "Размер выборки составляет ", tags$b("1677"), " пользователей, проживающих в России в возрасте от ", tags$b("13 до 64 лет."),
@@ -140,12 +136,7 @@ shinyUI(dashboardPage(dashboardHeader(#title = tags$a(href='http://mycompanyishe
                                                          addSpinner(plotOutput("places2",height = "500px"), spin = "circle",color = "#7792A6"))
                                 )
                        ))
-                       #,
-                       #tabPanel("Сырые Данные",
-                        #        
-                         #       dataTableOutput(outputId = "table"))
-                       
-                       #"OMI is the Only ISO 20252&26362 Certified Online Panel Provider in Russia"
+                      
                      )
                      
                      
